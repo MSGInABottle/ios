@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var messageField: UITextField!
+    var locManager = CLLocationManager()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        locManager.desiredAccuracy = kCLLocationAccuracyBest
+        locManager.requestWhenInUseAuthorization()
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,7 +28,19 @@ class ViewController: UIViewController {
     }
 
     @IBAction func sendMessageButton(_ sender: UIButton) {
-        print("BUTTON PRESSED")
+        print("Sending message: " + messageField.text!)
+        
+        //request permission if we don't already have it
+        locManager.requestWhenInUseAuthorization()
+        
+        // check location permissions
+        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            let currentLocation = locManager.location
+            let lat = currentLocation?.coordinate.latitude
+            let long = currentLocation?.coordinate.longitude
+            print("lat: " + String(describing: lat) + " long: " + String(describing: long));
+        }
     }
 
 }
