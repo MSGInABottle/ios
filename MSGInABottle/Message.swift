@@ -7,17 +7,19 @@
 //
 
 import Foundation
+import MapKit
 
-struct Message {
-    var text: String
-    var latitude: Double
-    var longitude: Double
-    var expiry: Date?
+class Message : NSObject, MKAnnotation {
+    let text: String
+    let latitude: Double
+    let longitude: Double
+    let expiry: Date?
 
     init(text: String, latitude: Double, longitude: Double) {
         self.text = text
         self.latitude = latitude
         self.longitude = longitude
+        self.expiry = nil
     }
     
     init?(json: [String: Any]) {
@@ -38,4 +40,13 @@ struct Message {
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSSZ"
         self.expiry = dateFormatter.date(from: expiry)!
     }
+
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2DMake(latitude, longitude)
+    }
+
+    var title: String? {
+        return text
+    }
+
 }

@@ -61,6 +61,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("received \(self.messages.count) messages")
                 DispatchQueue.main.async {
                     self.messageTable.reloadData()
+                    self.populateMapView();
                 }
             } catch {
                 print("error parsing json messages")
@@ -69,6 +70,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         task.resume()
     }
     
+    func populateMapView() {
+        for msg in messages {
+            mapView.addAnnotation(msg)
+        }
+    }
+
     // MARK: Table Functions
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
