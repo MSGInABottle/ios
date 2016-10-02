@@ -8,6 +8,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var messagesTable: UITableView!
     
     var locManager = CLLocationManager()
+    var refreshControl = UIRefreshControl()
     var messages: [Message] = []
     var unDroppedMessage = ""
     
@@ -22,15 +23,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Request permission if we don't already have it.
         locManager.requestWhenInUseAuthorization()
         
-        // Check location permissions.
-        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
-            let currentLocation = locManager.location
-            let lat = currentLocation?.coordinate.latitude
-            let long = currentLocation?.coordinate.longitude
-            print("lat: " + String(describing: lat!) + " long: " + String(describing: long!));
-            populateMessages(lat: lat!, long: long!)
-        }
+        populateMessagesBasedOnUserLocation()
+        
+        // Initialize refresh control.
+        self.refreshControl.addTarget(self, action: #selector(ViewController.updateMessages(_:)), for: UIControlEvents.valueChanged)
+        messagesTable.addSubview(self.refreshControl)
     }
     
     override func didReceiveMemoryWarning() {
@@ -166,7 +163,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         task.resume()
     }
     
+    private func centerMapOnLocation(lat: CLLocationDegrees, long: CLLocationDegrees) {
+        let location = CLLocation(latitude: lat, longitude: long)
+        let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+        self.mapView.setRegion(region, animated: true)
+    }
+    
+    private func populateMessagesBasedOnUserLocation() {
+        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            let currentLocation = locManager.location
+            let lat = currentLocation?.coordinate.latitude
+            let long = currentLocation?.coordinate.longitude
+            print("lat: " + String(describing: lat!) + " long: " + String(describing: long!));
+            centerMapOnLocation(lat: lat!, long: long!)
+            populateMessages(lat: lat!, long: long!)
+        }
+    }
+    
     private func populateMessages(lat: CLLocationDegrees, long: CLLocationDegrees) {
+        self.messages = []
         var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=\(lat)&longitude=\(long)")!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -204,5 +220,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for msg in messages {
             mapView.addAnnotation(msg)
         }
+    }
+    
+    @objc private func updateMessages(_ refreshControl: UIRefreshControl) {
+        populateMessagesBasedOnUserLocation()
+        self.messagesTable.reloadData()
+        self.refreshControl.endRefreshing()
     }
 }

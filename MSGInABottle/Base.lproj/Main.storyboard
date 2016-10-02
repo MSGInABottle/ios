@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,6 +41,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="3fq-fJ-6hf"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEt-kt-ouS">
+                                <state key="normal" backgroundImage="plus_icon"/>
+                                <connections>
+                                    <action selector="dropMessageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pik-PA-no0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -48,7 +55,9 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="czg-D2-K2Y" secondAttribute="bottom" id="QXN-aX-dSI"/>
                             <constraint firstAttribute="trailing" secondItem="L5I-eb-g9x" secondAttribute="trailing" id="Tn3-72-XYe"/>
                             <constraint firstItem="L5I-eb-g9x" firstAttribute="top" secondItem="Jcg-3f-TPJ" secondAttribute="top" id="aKm-zi-yQh"/>
+                            <constraint firstItem="czg-D2-K2Y" firstAttribute="top" secondItem="vEt-kt-ouS" secondAttribute="bottom" constant="17" id="iWJ-7u-fV7"/>
                             <constraint firstItem="czg-D2-K2Y" firstAttribute="leading" secondItem="Jcg-3f-TPJ" secondAttribute="leading" id="rVi-1f-GFm"/>
+                            <constraint firstItem="vEt-kt-ouS" firstAttribute="trailing" secondItem="Jcg-3f-TPJ" secondAttribute="trailingMargin" id="usW-FZ-dwh"/>
                             <constraint firstItem="czg-D2-K2Y" firstAttribute="top" secondItem="L5I-eb-g9x" secondAttribute="bottom" id="x4V-Pa-hhQ"/>
                         </constraints>
                     </view>
@@ -62,4 +71,7 @@
             <point key="canvasLocation" x="124" y="105.69715142428787"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus_icon" width="50" height="50"/>
+    </resources>
 </document>
