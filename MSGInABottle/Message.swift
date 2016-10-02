@@ -1,11 +1,3 @@
-//
-//  Message.swift
-//  MSGInABottle
-//
-//  Created by Sahil Jain on 10/2/16.
-//  Copyright © 2016 Internal Mini-Project Team. All rights reserved.
-//
-
 import Foundation
 import MapKit
 

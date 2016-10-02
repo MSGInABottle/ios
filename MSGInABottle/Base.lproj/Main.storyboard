@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -15,97 +15,51 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Jcg-3f-TPJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yoe-IU-icI">
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ruy-w9-QO1">
-                                        <subviews>
-                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BXa-HC-Dkn">
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="641" id="KUn-qG-Zrw"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="glt-UW-cxl"/>
-                                                </connections>
-                                            </mapView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6kC-yJ-bSX">
-                                                <frame key="frameInset" minY="639" width="375" height="332"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" textLabel="efa-1X-lN8" style="IBUITableViewCellStyleDefault" id="FSI-Uo-Qd8">
-                                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FSI-Uo-Qd8" id="OyV-Li-x7H">
-                                                            <frame key="frameInset" width="375" height="43.5"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="efa-1X-lN8">
-                                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </tableViewCellContentView>
-                                                    </tableViewCell>
-                                                </prototypes>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Otz-Ii-CGQ"/>
-                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="MIC-I8-Wbo"/>
-                                                </connections>
-                                            </tableView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2S-dp-jfT">
-                                                <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="dropMessageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uAu-yf-ENB"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="6kC-yJ-bSX" secondAttribute="trailing" id="24M-dm-Uza"/>
-                                            <constraint firstItem="BXa-HC-Dkn" firstAttribute="top" secondItem="ruy-w9-QO1" secondAttribute="top" id="4eG-gz-wLu"/>
-                                            <constraint firstItem="6kC-yJ-bSX" firstAttribute="leading" secondItem="ruy-w9-QO1" secondAttribute="leading" id="JYa-I8-e3C"/>
-                                            <constraint firstAttribute="bottom" secondItem="6kC-yJ-bSX" secondAttribute="bottom" id="OXo-3G-x9w"/>
-                                            <constraint firstAttribute="height" constant="1000" id="bl9-sG-E7G"/>
-                                            <constraint firstItem="BXa-HC-Dkn" firstAttribute="leading" secondItem="ruy-w9-QO1" secondAttribute="leading" id="bo6-w7-jef"/>
-                                            <constraint firstItem="6kC-yJ-bSX" firstAttribute="top" secondItem="BXa-HC-Dkn" secondAttribute="bottom" constant="-2" id="cyT-pv-Oem"/>
-                                            <constraint firstAttribute="trailing" secondItem="BXa-HC-Dkn" secondAttribute="trailing" id="deN-hY-8vr"/>
-                                            <constraint firstItem="6kC-yJ-bSX" firstAttribute="top" secondItem="f2S-dp-jfT" secondAttribute="bottom" constant="24" id="hR8-BU-tpX"/>
-                                            <constraint firstAttribute="trailing" secondItem="f2S-dp-jfT" secondAttribute="trailing" constant="25" id="r1u-1v-Ey6"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L5I-eb-g9x">
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ruy-w9-QO1" secondAttribute="bottom" id="ALZ-MI-Mcs"/>
-                                    <constraint firstItem="ruy-w9-QO1" firstAttribute="top" secondItem="yoe-IU-icI" secondAttribute="top" id="KMy-sW-0O7"/>
-                                    <constraint firstAttribute="trailing" secondItem="ruy-w9-QO1" secondAttribute="trailing" id="KiQ-7F-1oT"/>
-                                    <constraint firstItem="ruy-w9-QO1" firstAttribute="leading" secondItem="yoe-IU-icI" secondAttribute="leading" id="dXe-YJ-YZ8"/>
+                                    <constraint firstAttribute="height" constant="400" id="Yad-jE-DEe"/>
                                 </constraints>
-                            </scrollView>
+                            </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="czg-D2-K2Y">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" id="9cy-Cw-vGg">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9cy-Cw-vGg" id="e4Y-sJ-Xvy">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="nvh-fh-hOh"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="3fq-fJ-6hf"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ruy-w9-QO1" firstAttribute="width" secondItem="Jcg-3f-TPJ" secondAttribute="width" id="6bc-Yh-e25"/>
-                            <constraint firstItem="yoe-IU-icI" firstAttribute="leading" secondItem="Jcg-3f-TPJ" secondAttribute="leading" id="F50-Np-Fu2"/>
-                            <constraint firstItem="yoe-IU-icI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Izt-uO-IkC"/>
-                            <constraint firstAttribute="trailing" secondItem="yoe-IU-icI" secondAttribute="trailing" id="Wfb-xs-Wha"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yoe-IU-icI" secondAttribute="bottom" id="d7x-by-2R7"/>
+                            <constraint firstAttribute="trailing" secondItem="czg-D2-K2Y" secondAttribute="trailing" id="Adt-QF-D0y"/>
+                            <constraint firstItem="L5I-eb-g9x" firstAttribute="leading" secondItem="Jcg-3f-TPJ" secondAttribute="leading" id="EAZ-7T-8bB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="czg-D2-K2Y" secondAttribute="bottom" id="QXN-aX-dSI"/>
+                            <constraint firstAttribute="trailing" secondItem="L5I-eb-g9x" secondAttribute="trailing" id="Tn3-72-XYe"/>
+                            <constraint firstItem="L5I-eb-g9x" firstAttribute="top" secondItem="Jcg-3f-TPJ" secondAttribute="top" id="aKm-zi-yQh"/>
+                            <constraint firstItem="czg-D2-K2Y" firstAttribute="leading" secondItem="Jcg-3f-TPJ" secondAttribute="leading" id="rVi-1f-GFm"/>
+                            <constraint firstItem="czg-D2-K2Y" firstAttribute="top" secondItem="L5I-eb-g9x" secondAttribute="bottom" id="x4V-Pa-hhQ"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
-                        <outlet property="mapView" destination="BXa-HC-Dkn" id="geO-c7-bSi"/>
-                        <outlet property="messageTable" destination="6kC-yJ-bSX" id="IvB-PV-sbt"/>
+                        <outlet property="mapView" destination="L5I-eb-g9x" id="hJn-zn-71A"/>
+                        <outlet property="messagesTable" destination="czg-D2-K2Y" id="4Ix-Rb-3MM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="106.14692653673164"/>
+            <point key="canvasLocation" x="124" y="105.69715142428787"/>
         </scene>
     </scenes>
 </document>

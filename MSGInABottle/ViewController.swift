@@ -5,7 +5,8 @@ import CoreLocation
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var messageTable: UITableView!
+    @IBOutlet weak var messagesTable: UITableView!
+    
     var locManager = CLLocationManager()
     var messages: [Message] = []
     var unDroppedMessage = ""
@@ -13,14 +14,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view, typically from a nib.
         locManager.desiredAccuracy = kCLLocationAccuracyBest
         locManager.requestWhenInUseAuthorization()
         
-        //request permission if we don't already have it
+        // Request permission if we don't already have it.
         locManager.requestWhenInUseAuthorization()
         
-        // check location permissions
+        // Check location permissions.
         if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
             let currentLocation = locManager.location
@@ -36,46 +38,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     
-    private func populateMessages(lat: CLLocationDegrees, long: CLLocationDegrees) {
-        var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=\(lat)&longitude=\(long)")!)
-        request.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                return
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString!)")
-            do {
-                let obj = try JSONSerialization.jsonObject(with: data) as? [Any]
-                for msg in obj! {
-                    self.messages.append(Message(json: msg as! [String: Any])!)
-                }
-                print("received \(self.messages.count) messages")
-                DispatchQueue.main.async {
-                    self.messageTable.reloadData()
-                    self.populateMapView();
-                }
-            } catch {
-                print("error parsing json messages")
-            }
-        }
-        task.resume()
-    }
-    
-    func populateMapView() {
-        for msg in messages {
-            mapView.addAnnotation(msg)
-        }
-    }
-
     // MARK: Table Functions
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -204,8 +166,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         task.resume()
     }
     
-    private func printMessages() {
-        var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=119.123123&longitude=120.1222")!)
+    private func populateMessages(lat: CLLocationDegrees, long: CLLocationDegrees) {
+        var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=\(lat)&longitude=\(long)")!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {  // Check for fundamental networking error.
@@ -216,11 +178,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {  // Check for http errors.
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
+                return
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
+            print("responseString = \(responseString!)")
+            do {
+                let obj = try JSONSerialization.jsonObject(with: data) as? [Any]
+                for msg in obj! {
+                    self.messages.append(Message(json: msg as! [String: Any])!)
+                }
+                print("received \(self.messages.count) messages")
+                DispatchQueue.main.async {
+                    self.messagesTable.reloadData()
+                    self.populateMapView();
+                }
+            } catch {
+                print("error parsing json messages")
+            }
         }
         task.resume()
+    }
+    
+    private func populateMapView() {
+        for msg in messages {
+            mapView.addAnnotation(msg)
+        }
     }
 }
