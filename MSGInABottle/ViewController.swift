@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var messageField: UITextField!
     var locManager = CLLocationManager()
+    var messages: [Message] = []
     
     
     override func viewDidLoad() {
@@ -20,6 +21,19 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         locManager.desiredAccuracy = kCLLocationAccuracyBest
         locManager.requestWhenInUseAuthorization()
+        
+        //request permission if we don't already have it
+        locManager.requestWhenInUseAuthorization()
+        
+        // check location permissions
+        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            let currentLocation = locManager.location
+            let lat = currentLocation?.coordinate.latitude
+            let long = currentLocation?.coordinate.longitude
+            print("lat: " + String(describing: lat!) + " long: " + String(describing: long!));
+            populateMessages(lat: lat!, long: long!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,8 +41,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func printMessages() {
-        var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=119.123123&longitude=120.1222")!)
+    private func populateMessages(lat: CLLocationDegrees, long: CLLocationDegrees) {
+        var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=\(lat)&longitude=\(long)")!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
@@ -39,10 +53,20 @@ class ViewController: UIViewController {
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
+                return
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
+            print("responseString = \(responseString!)")
+            do {
+                let obj = try JSONSerialization.jsonObject(with: data) as? [Any]
+                for msg in obj! {
+                    self.messages.append(Message(json: msg as! [String: Any])!)
+                }
+                print("received \(self.messages.count) messages")
+            } catch {
+                print("error parsing json messages")
+            }
         }
         task.resume()
     }

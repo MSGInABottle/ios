@@ -13,6 +13,7 @@
 		BA4BBA271DA040D900CF8998 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA4BBA261DA040D900CF8998 /* Assets.xcassets */; };
 		BA4BBA2A1DA040D900CF8998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA4BBA281DA040D900CF8998 /* LaunchScreen.storyboard */; };
 		BA4BBA351DA040DA00CF8998 /* MSGInABottleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BBA341DA040DA00CF8998 /* MSGInABottleTests.swift */; };
+		BAC3CB091DA0CBC000AF3D0F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3CB081DA0CBC000AF3D0F /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		BA4BBA301DA040DA00CF8998 /* MSGInABottleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MSGInABottleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA4BBA341DA040DA00CF8998 /* MSGInABottleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGInABottleTests.swift; sourceTree = "<group>"; };
 		BA4BBA361DA040DA00CF8998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAC3CB081DA0CBC000AF3D0F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				BA4BBA261DA040D900CF8998 /* Assets.xcassets */,
 				BA4BBA281DA040D900CF8998 /* LaunchScreen.storyboard */,
 				BA4BBA2B1DA040D900CF8998 /* Info.plist */,
+				BAC3CB081DA0CBC000AF3D0F /* Message.swift */,
 			);
 			path = MSGInABottle;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAC3CB091DA0CBC000AF3D0F /* Message.swift in Sources */,
 				BA4BBA221DA040D900CF8998 /* ViewController.swift in Sources */,
 				BA4BBA201DA040D900CF8998 /* AppDelegate.swift in Sources */,
 			);
@@ -408,6 +412,7 @@
 				BA4BBA3B1DA040DA00CF8998 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA4BBA3C1DA040DA00CF8998 /* Build configuration list for PBXNativeTarget "MSGInABottleTests" */ = {
 			isa = XCConfigurationList;
@@ -416,6 +421,7 @@
 				BA4BBA3E1DA040DA00CF8998 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
