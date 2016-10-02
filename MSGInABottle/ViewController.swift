@@ -112,6 +112,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("lat: " + String(describing: lat!)
                 + " long: " + String(describing: long!));
             self.makeRequestToDropMessage(text: message, lat: lat!, long: long!)
+            self.populateMessagesBasedOnUserLocation()
         }
         
     }
@@ -165,7 +166,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private func centerMapOnLocation(lat: CLLocationDegrees, long: CLLocationDegrees) {
         let location = CLLocation(latitude: lat, longitude: long)
-        let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+        let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500)
         self.mapView.setRegion(region, animated: true)
     }
     
@@ -183,6 +184,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private func populateMessages(lat: CLLocationDegrees, long: CLLocationDegrees) {
         self.messages = []
+        self.mapView.removeAnnotations(self.mapView.annotations)
         var request = URLRequest(url: URL(string: "http://52.41.253.190:9000/messages/?latitude=\(lat)&longitude=\(long)")!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
