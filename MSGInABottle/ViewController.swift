@@ -59,6 +59,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.messages.append(Message(json: msg as! [String: Any])!)
                 }
                 print("received \(self.messages.count) messages")
+                DispatchQueue.main.async {
+                    self.messageTable.reloadData()
+                }
             } catch {
                 print("error parsing json messages")
             }

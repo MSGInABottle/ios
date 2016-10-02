@@ -12,7 +12,13 @@ struct Message {
     var text: String
     var latitude: Double
     var longitude: Double
-    var expiry: Date
+    var expiry: Date?
+
+    init(text: String, latitude: Double, longitude: Double) {
+        self.text = text
+        self.latitude = latitude
+        self.longitude = longitude
+    }
     
     init?(json: [String: Any]) {
         guard let text = json["Text"] as? String,
